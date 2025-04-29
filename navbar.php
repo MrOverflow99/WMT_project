@@ -1,10 +1,10 @@
 <?php
-// Esta función crea una barra de navegación dinámica basada en el estado de la sesión
+
 function renderNavbar() {
-    // Verificar si el usuario está conectado
+    // siamo loggati?
     $isLoggedIn = isset($_SESSION["user_id"]);
     
-    // Si el usuario está conectado, obtener su nombre
+    // Se l'user è loggato metti il nome
     $username = "";
     if ($isLoggedIn) {
         $mysqli = require __DIR__ . "/database.php";
@@ -16,7 +16,7 @@ function renderNavbar() {
         }
     }
     
-    // Renderizar la barra de navegación
+    // navbar
     ?>
     <nav class="navbar">
         <div class="navbar__container">

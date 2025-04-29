@@ -2,7 +2,7 @@
 session_start();
 $is_invalid = false;
 
-// Incluir el componente de la barra de navegación
+// Include la navbar
 require_once "navbar.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -47,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     
-    <!-- Usar el componente de la barra de navegación -->
+    <!-- carica la navbar -->
     <?php renderNavbar(); ?>
     
-    <!-- Contenedor principal con estilo coherente -->
+    
     <div class="main">
         <div class="login-container">
             <h1>Login</h1>

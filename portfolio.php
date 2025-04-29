@@ -5,19 +5,19 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Conectar a la base de datos
+
 $mysqli = require __DIR__ . "/database.php";
 
-// Obtener información del usuario actual
+//Info user attuale
 $sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
 $result = $mysqli->query($sql);
 $user = $result->fetch_assoc();
 
-// Obtener todos los ingenieros de la base de datos
+
 $sql_ingenieros = "SELECT * FROM ingegneri";
 $result_ingenieros = $mysqli->query($sql_ingenieros);
 
-// Incluir el componente de la barra de navegación
+
 require_once "navbar.php";
 ?>
 
@@ -30,12 +30,12 @@ require_once "navbar.php";
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Usar el componente de la barra de navegación -->
+    <!-- navbar -->
     <?php renderNavbar(); ?>
 
     <main class="engineer-section">
     <?php 
-    // Mostrar ingenieros desde la base de datos
+
     if ($result_ingenieros->num_rows > 0) {
         while($ingeniero = $result_ingenieros->fetch_assoc()) { 
             $image_data = $ingeniero['foto_url'];
@@ -61,12 +61,12 @@ require_once "navbar.php";
     <section class="form-section">
         <h2>Richiedi un servizio</h2>
         <form action="process-request.php" method="POST">
-            <!-- Autocompletamos el formulario con los datos del usuario logueado -->
+            <!-- RIEMPI COI DATI DELL'USER LOGGATO -->
             <input type="text" name="nome" value="<?php echo htmlspecialchars($user['name']); ?>" placeholder="Il tuo nome" required>
             <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" placeholder="La tua email" required>
             <select name="ingegnere" required>
                 <?php 
-                // Reiniciamos el puntero del resultado
+                // Reimpostiamo il puntatore
                 $result_ingenieros->data_seek(0);
                 while($ingeniero = $result_ingenieros->fetch_assoc()) { 
                 ?>

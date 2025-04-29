@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Incluir el componente de la barra de navegación
+// Includi navbar
 require_once "navbar.php";
 
 if (isset($_SESSION["user_id"])) {
@@ -27,7 +27,7 @@ if (isset($_SESSION["user_id"])) {
             <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
         </head>
         <body>
-         <!-- Usar el componente de la barra de navegación -->
+         <!-- Navbar -->
          <?php renderNavbar(); ?>
 
         <!-- Hero Section -->

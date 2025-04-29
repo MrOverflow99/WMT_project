@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 require_once "navbar.php";
 $mysqli = require __DIR__ . "/database.php";
 
-// Obtener información del usuario actual
+// Info dell'utente in sessione in questo momento
 $sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
 $result = $mysqli->query($sql);
 $user = $result->fetch_assoc();
@@ -17,13 +17,13 @@ $success_message = '';
 $error_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Verificar que todos los campos requeridos estén presentes
+    // Verifica dei campi
     if (empty($_POST['nome']) || empty($_POST['specialita']) || empty($_POST['progetti']) || 
         empty($_POST['github_url']) || empty($_POST['linkedin_url']) || 
         empty($_FILES['foto']['name'])) {
         $error_message = "Tutti i campi sono obbligatori!";
     } else {
-        // Procesar y validar la imagen
+        // validare immagine
         $target_dir = "uploads/";
         $file_extension = strtolower(pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
         $allowed_extensions = array("jpg", "jpeg", "png", "gif");
@@ -33,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } elseif ($_FILES["foto"]["size"] > 5000000) { // 5MB max
             $error_message = "L'immagine è troppo grande. Il limite è 5MB.";
         } else {
-            // La imagen es válida, procesarla
+            
             $image_data = file_get_contents($_FILES["foto"]["tmp_name"]);
             
-            // Preparar los datos para insertar en la base de datos
+            
             $nome = $mysqli->real_escape_string($_POST['nome']);
             $specialita = $mysqli->real_escape_string($_POST['specialita']);
             $progetti = $mysqli->real_escape_string($_POST['progetti']);
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $email_url = $mysqli->real_escape_string($_POST['email_url'] ?? '');
             $instagram_url = $mysqli->real_escape_string($_POST['instagram_url'] ?? '');
             
-            // Preparar la consulta SQL
+
             $stmt = $mysqli->prepare("INSERT INTO ingegneri (nome, specialita, progetti, github_url, linkedin_url, foto_url, email_url, instagram_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             
             if (!$stmt) {
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Navbar -->
     <?php renderNavbar(); ?>
     
     <div class="engineer-form-section">

@@ -7,20 +7,20 @@ if (!isset($_SESSION['user_id'])) {
 
 $mysqli = require __DIR__ . "/database.php";
 
-// Recupero y validación de los datos enviados por el formulario
+
 $nome = trim($_POST['nome']);
 $email = trim($_POST['email']);
 $ingegnere = trim($_POST['ingegnere']);
 $messaggio = trim($_POST['messaggio']);
-$user_id = $_SESSION['user_id']; // ID del usuario que ha iniciado sesión
+$user_id = $_SESSION['user_id'];
 
-// Verificar que todos los campos hayan sido completados
+// verifica dei campi
 if (empty($nome) || empty($email) || empty($ingegnere) || empty($messaggio)) {
     echo "Tutti i campi sono obbligatori.";
     exit();
 }
 
-// Preparar la consulta para insertar la solicitud en la base de datos
+// preparando consulta db
 $stmt = $mysqli->prepare("INSERT INTO richieste (nome_utente, email_utente, ingegnere, messaggio, utente_id) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("ssssi", $nome, $email, $ingegnere, $messaggio, $user_id);
 
