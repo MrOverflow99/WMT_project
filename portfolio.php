@@ -48,7 +48,7 @@ require_once "navbar.php";
             <a href="<?php echo htmlspecialchars($ingeniero['github_url']); ?>" target="_blank">GitHub</a> |
             <a href="<?php echo htmlspecialchars($ingeniero['linkedin_url']); ?>" target="_blank">LinkedIn</a> |
             <a href="<?php echo htmlspecialchars($ingeniero['instagram_url']); ?>" target="_blank">Instagram</a> |
-            <a href="<?php echo htmlspecialchars($ingeniero['email_url']); ?>" target="_blank">Email</a>
+            <h2><?php echo htmlspecialchars($ingeniero['email_url']); ?></h2>
         </div>
     <?php 
         }
